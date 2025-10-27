@@ -8,3 +8,12 @@ Draw detection
 Reset button functionality
 Visual feedback with hover effects and winning cell highlights
 Purple gradient design with smooth animations
+
+1. Copy the AI’s code into a file called attempt1.html - it named it tic-tac-toe.html
+It does work!
+
+i want to name the tic-tac-toe.html attempt1.html
+I'll rename the file for you.
+
+Renaming tic-tac-toe.html to attempt1.htmlbashmv /mnt/user-data/outputs/tic-tac-toe.html /mnt/user-data/outputs/attempt1.htmlOutputexit code Done! The file has been renamed to attempt1.html.
+
