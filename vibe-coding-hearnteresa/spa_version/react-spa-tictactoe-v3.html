@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe - React SPA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&display=swap" rel="stylesheet">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Baloo 2', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: rise 15s infinite ease-in;
+        }
+
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 12s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 20%;
+            animation-duration: 10s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            left: 30%;
+            animation-duration: 14s;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            left: 40%;
+            animation-duration: 11s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 45px;
+            height: 45px;
+            left: 50%;
+            animation-duration: 13s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(6) {
+            width: 35px;
+            height: 35px;
+            left: 60%;
+            animation-duration: 12s;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(7) {
+            width: 55px;
+            height: 55px;
+            left: 70%;
+            animation-duration: 10s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(8) {
+            width: 40px;
+            height: 40px;
+            left: 80%;
+            animation-duration: 14s;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(9) {
+            width: 50px;
+            height: 50px;
+            left: 90%;
+            animation-duration: 11s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(10) {
+            width: 45px;
+            height: 45px;
+            left: 15%;
+            animation-duration: 13s;
+            animation-delay: 6s;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+            100% {
+                bottom: 110vh;
+                transform: translateX(-100px);
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 3em;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 15px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .score.champion {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            animation: champion-glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes champion-glow {
+            from {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            to {
+                box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .score-label {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .score-value {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .status {
+            font-size: 1.7em;
+            margin-bottom: 20px;
+            color: #ff6b9d;
+            font-weight: 700;
+            min-height: 40px;
+        }
+
+        .status.champion-message {
+            font-size: 2em;
+            color: #ffd700;
+            animation: pulse-text 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-text {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
+            gap: 10px;
+            margin: 0 auto 30px;
+            max-width: 390px;
+        }
+
+        .cell {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            font-size: 3.5em;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #333;
+            font-family: 'Baloo 2', cursive;
+        }
+
+        .cell:hover:not(:disabled) {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        .cell:disabled {
+            cursor: not-allowed;
+        }
+
+        .cell.x {
+            color: #ff6b9d;
+        }
+
+        .cell.o {
+            color: #c44569;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .reset-btn, .clear-scores-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-weight: 700;
+            font-family: 'Baloo 2', cursive;
+        }
+
+        .reset-btn:hover, .clear-scores-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .reset-btn:active, .clear-scores-btn:active {
+            transform: scale(0.95);
+        }
+
+        .winning-cell {
+            background: #ffd700 !important;
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Bubbles Component
+        function Bubbles() {
+            return (
+                <div className="bubbles">
+                    {[...Array(10)].map((_, index) => (
+                        <div key={index} className="bubble"></div>
+                    ))}
+                </div>
+            );
+        }
+
+        // Scoreboard Component
+        function Scoreboard({ scores, champion }) {
+            return (
+                <div className="scoreboard">
+                    <div className={`score ${champion === 'X' ? 'champion' : ''}`}>
+                        <div className="score-label">Player X</div>
+                        <div className="score-value">{scores.X}</div>
+                    </div>
+                    <div className={`score ${champion === 'O' ? 'champion' : ''}`}>
+                        <div className="score-label">Player O</div>
+                        <div className="score-value">{scores.O}</div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Status Component
+        function Status({ message, isChampion }) {
+            return (
+                <div className={`status ${isChampion ? 'champion-message' : ''}`}>
+                    {message}
+                </div>
+            );
+        }
+
+        // Cell Component
+        function Cell({ value, onClick, isWinning }) {
+            const cellClass = `cell ${value ? value.toLowerCase() : ''} ${isWinning ? 'winning-cell' : ''}`;
+            
+            return (
+                <button 
+                    className={cellClass}
+                    onClick={onClick}
+                    disabled={value !== null}
+                >
+                    {value}
+                </button>
+            );
+        }
+
+        // Board Component
+        function Board({ board, onCellClick, winningCells }) {
+            return (
+                <div className="board">
+                    {board.map((value, index) => (
+                        <Cell
+                            key={index}
+                            value={value}
+                            onClick={() => onCellClick(index)}
+                            isWinning={winningCells.includes(index)}
+                        />
+                    ))}
+                </div>
+            );
+        }
+
+        // Buttons Component
+        function Buttons({ onNewGame, onClearScores }) {
+            return (
+                <div className="buttons">
+                    <button className="reset-btn" onClick={onNewGame}>
+                        New Game
+                    </button>
+                    <button className="clear-scores-btn" onClick={onClearScores}>
+                        Clear Scores
+                    </button>
+                </div>
+            );
+        }
+
+        // Main Game Component
+        function TicTacToe() {
+            const [board, setBoard] = useState(Array(9).fill(null));
+            const [currentPlayer, setCurrentPlayer] = useState('X');
+            const [gameActive, setGameActive] = useState(true);
+            const [scores, setScores] = useState({ X: 0, O: 0 });
+            const [statusMessage, setStatusMessage] = useState("Player X's Turn");
+            const [winningCells, setWinningCells] = useState([]);
+            const [champion, setChampion] = useState(null);
+            const [lastWinner, setLastWinner] = useState(null);
+
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6]              // Diagonals
+            ];
+
+            // Load scores from localStorage on mount
+            useEffect(() => {
+                const savedScores = localStorage.getItem('tictactoeScores');
+                if (savedScores) {
+                    setScores(JSON.parse(savedScores));
+                }
+            }, []);
+
+            // Save scores to localStorage whenever they change
+            useEffect(() => {
+                localStorage.setItem('tictactoeScores', JSON.stringify(scores));
+            }, [scores]);
+
+            // Check for winner
+            const checkWinner = (currentBoard) => {
+                for (let combination of winningCombinations) {
+                    const [a, b, c] = combination;
+                    if (currentBoard[a] && 
+                        currentBoard[a] === currentBoard[b] && 
+                        currentBoard[a] === currentBoard[c]) {
+                        return { winner: currentBoard[a], cells: [a, b, c] };
+                    }
+                }
+                return null;
+            };
+
+            // Check for draw
+            const checkDraw = (currentBoard) => {
+                return currentBoard.every(cell => cell !== null);
+            };
+
+            // Handle cell click
+            const handleCellClick = (index) => {
+                if (board[index] || !gameActive || champion) return;
+
+                const newBoard = [...board];
+                newBoard[index] = currentPlayer;
+                setBoard(newBoard);
+
+                // Check for winner
+                const winResult = checkWinner(newBoard);
+                if (winResult) {
+                    const newScores = {
+                        ...scores,
+                        [winResult.winner]: scores[winResult.winner] + 1
+                    };
+                    
+                    setWinningCells(winResult.cells);
+                    setScores(newScores);
+                    setLastWinner(winResult.winner); // Track who won this game
+                    
+                    // Check if player reached 5 wins
+                    if (newScores[winResult.winner] >= 5) {
+                        setStatusMessage(`🏆 PLAYER ${winResult.winner} IS THE CHAMPION! 🏆`);
+                        setChampion(winResult.winner);
+                        setGameActive(false);
+                        
+                        // Auto-reset after 3 seconds
+                        setTimeout(() => {
+                            handleRoundReset();
+                        }, 3000);
+                    } else {
+                        setStatusMessage(`Player ${winResult.winner} Wins! 🎉`);
+                        setGameActive(false);
+                    }
+                    return;
+                }
+
+                // Check for draw
+                if (checkDraw(newBoard)) {
+                    setStatusMessage("It's a Draw! 🤝");
+                    setGameActive(false);
+                    setLastWinner(null); // No winner, so next game starts with X
+                    return;
+                }
+
+                // Switch player
+                const nextPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                setCurrentPlayer(nextPlayer);
+                setStatusMessage(`Player ${nextPlayer}'s Turn`);
+            };
+
+            // Reset game - winner goes first
+            const handleNewGame = () => {
+                setBoard(Array(9).fill(null));
+                
+                // If there was a winner last game, they go first
+                // Otherwise, start with X (or keep current player if manually reset)
+                const firstPlayer = lastWinner || 'X';
+                setCurrentPlayer(firstPlayer);
+                setGameActive(true);
+                setStatusMessage(`Player ${firstPlayer}'s Turn`);
+                setWinningCells([]);
+            };
+
+            // Reset entire round (when someone reaches 5)
+            const handleRoundReset = () => {
+                setBoard(Array(9).fill(null));
+                setCurrentPlayer('X');
+                setGameActive(true);
+                setStatusMessage("Player X's Turn");
+                setWinningCells([]);
+                setScores({ X: 0, O: 0 });
+                setChampion(null);
+                setLastWinner(null); // Reset winner tracking
+            };
+
+            // Clear scores manually
+            const handleClearScores = () => {
+                setScores({ X: 0, O: 0 });
+                setChampion(null);
+                setLastWinner(null);
+            };
+
+            return (
+                <>
+                    <Bubbles />
+                    <div className="container">
+                        <h1>Tic-Tac-Toe</h1>
+                        <Scoreboard scores={scores} champion={champion} />
+                        <Status message={statusMessage} isChampion={champion !== null} />
+                        <Board 
+                            board={board} 
+                            onCellClick={handleCellClick}
+                            winningCells={winningCells}
+                        />
+                        <Buttons 
+                            onNewGame={handleNewGame}
+                            onClearScores={handleClearScores}
+                        />
+                    </div>
+                </>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<TicTacToe />);
+    </script>
+</body>
+</html>
