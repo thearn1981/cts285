@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Datamon - Main Menu{% endblock %}
+
+{% block content %}
+<div class="menu-container">
+    <h2>Choose Your Challenge</h2>
+    <p class="subtitle">Select a game mode below to start earning points!</p>
+    
+    <div class="game-cards">
+        <!-- Answer Checker Card -->
+        <a href="{{ url_for('answer_checker') }}" class="game-card">
+            <div class="game-icon">📝</div>
+            <h3>Answer Checker</h3>
+            <p>Test your math skills by solving 10 problems!</p>
+            <span class="play-button">Play Now →</span>
+        </a>
+
+        <!-- Memory Bank Card -->
+        <a href="{{ url_for('memory_bank') }}" class="game-card">
+            <div class="game-icon">🧠</div>
+            <h3>Memory Bank</h3>
+            <p>Remember and recall math facts quickly!</p>
+            <span class="play-button coming-soon">Coming Soon</span>
+        </a>
+
+        <!-- Electro Flash Card -->
+        <a href="{{ url_for('electro_flash') }}" class="game-card">
+            <div class="game-icon">⚡</div>
+            <h3>Electro Flash</h3>
+            <p>Speed rounds of rapid-fire math questions!</p>
+            <span class="play-button coming-soon">Coming Soon</span>
+        </a>
+    </div>
+
+    <div class="instructions">
+        <h3>How to Play</h3>
+        <ul>
+            <li>🎯 Choose a game mode above</li>
+            <li>💯 Complete challenges to earn points</li>
+            <li>🏆 Your total points are saved automatically</li>
+            <li>🎉 Have fun learning math!</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

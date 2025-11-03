@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ game_name }} - Coming Soon{% endblock %}
+
+{% block content %}
+<div class="coming-soon-page">
+    <div class="game-header">
+        <a href="{{ url_for('index') }}" class="back-button">← Back to Menu</a>
+        <h2>{{ game_icon }} {{ game_name }}</h2>
+    </div>
+
+    <div class="coming-soon-content">
+        <div class="construction-icon">🚧</div>
+        <h3>Coming Soon!</h3>
+        <p>We're working hard to bring you this exciting game mode.</p>
+        <p>Check back later for updates!</p>
+        
+        <div class="teaser">
+            {% if game_name == 'Memory Bank' %}
+                <p>💡 <strong>What to expect:</strong> Test your memory by recalling math facts and equations!</p>
+            {% elif game_name == 'Electro Flash' %}
+                <p>💡 <strong>What to expect:</strong> Race against the clock in rapid-fire math challenges!</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('index') }}" class="back-home-button">🏠 Back to Menu</a>
+    </div>
+</div>
+{% endblock %}

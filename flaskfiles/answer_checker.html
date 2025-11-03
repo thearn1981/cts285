@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Answer Checker{% endblock %}
+
+{% block content %}
+<div class="game-page">
+    <div class="game-header">
+        <a href="{{ url_for('index') }}" class="back-button">← Back to Menu</a>
+        <h2>📝 Answer Checker</h2>
+    </div>
+
+    {% if not game_active %}
+        <!-- Welcome screen -->
+        <div class="welcome-screen">
+            <h3>How to Play</h3>
+            <div class="instructions-box">
+                <ol>
+                    <li>You'll solve <strong>10 math problems</strong></li>
+                    <li>Enter problems in the format: <code>4+4=8</code></li>
+                    <li>Supported operations: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+                    <li>Each correct answer earns you <strong>1 point</strong>!</li>
+                </ol>
+                
+                <div class="examples">
+                    <h4>Example Problems:</h4>
+                    <ul>
+                        <li><code>5+3=8</code> ✅</li>
+                        <li><code>10-4=6</code> ✅</li>
+                        <li><code>6*7=42</code> ✅</li>
+                        <li><code>15/3=5</code> ✅</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <form method="POST" action="{{ url_for('start_quiz') }}">
+                <button type="submit" class="start-button">🚀 Start Quiz</button>
+            </form>
+        </div>
+
+    {% elif problem_count < 10 %}
+        <!-- Active quiz -->
+        <div class="quiz-active">
+            <!-- Progress bar -->
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {{ (problem_count / 10) * 100 }}%"></div>
+            </div>
+            
+            <div class="quiz-info">
+                <p class="problem-number">Problem {{ problem_count + 1 }} of 10</p>
+                <p class="current-score">Current Score: <span class="score-number">{{ score }}</span> 🌟</p>
+            </div>
+
+            <!-- Problem input form -->
+            <form method="POST" action="{{ url_for('submit_answer') }}" class="problem-form">
+                <label for="problem">Enter your math problem:</label>
+                <input 
+                    type="text" 
+                    id="problem" 
+                    name="problem" 
+                    placeholder="e.g., 4+4=8" 
+                    required 
+                    autofocus
+                    autocomplete="off"
+                >
+                <button type="submit" class="submit-button">Check Answer ✓</button>
+            </form>
+
+            <form method="POST" action="{{ url_for('reset_quiz') }}" class="reset-form">
+                <button type="submit" class="reset-button">Reset Quiz</button>
+            </form>
+        </div>
+
+    {% else %}
+        <!-- Quiz complete -->
+        <div class="quiz-complete">
+            <h3>🎉 Quiz Complete!</h3>
+            
+            {% set percentage = (score / 10) * 100 %}
+            
+            <div class="results-box {% if percentage >= 80 %}excellent{% elif percentage >= 60 %}good{% else %}practice{% endif %}">
+                <p class="final-score">You scored: <strong>{{ score }}/10</strong></p>
+                <p class="percentage">({{ percentage|int }}%)</p>
+                
+                {% if percentage >= 80 %}
+                    <p class="message">🌟 Excellent! You're a math superstar!</p>
+                {% elif percentage >= 60 %}
+                    <p class="message">👍 Good job! Keep up the great work!</p>
+                {% else %}
+                    <p class="message">💪 Keep practicing! You'll get better!</p>
+                {% endif %}
+                
+                <p class="points-earned">Points earned: <strong>+{{ score }}</strong> 🌟</p>
+            </div>
+
+            <div class="action-buttons">
+                <form method="POST" action="{{ url_for('start_quiz') }}" style="display: inline;">
+                    <button type="submit" class="play-again-button">🔄 Play Again</button>
+                </form>
+                
+                <a href="{{ url_for('index') }}" class="menu-button">🏠 Back to Menu</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
