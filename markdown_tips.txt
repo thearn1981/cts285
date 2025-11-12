@@ -1,0 +1,132 @@
+MARKDOWN FORMATTING TIPS AND REFERENCE GUIDE
+==============================================
+
+HEADERS
+-------
+# Header 1 (largest)
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6 (smallest)
+
+TEXT FORMATTING
+---------------
+**Bold text**
+*Italic text*
+***Bold and italic***
+~~Strikethrough~~
+`Inline code`
+
+LISTS
+-----
+### Unordered Lists
+- Item 1
+- Item 2
+  - Nested item
+  - Another nested item
+
+### Ordered Lists
+1. First item
+2. Second item
+   1. Nested numbered item
+   2. Another nested item
+
+LINKS AND IMAGES
+----------------
+[Link text](https://example.com)
+[Link with title](https://example.com "Title text")
+![Image alt text](image-url.jpg)
+![Local image](./images/photo.png)
+
+CODE BLOCKS
+-----------
+### Inline code
+Use `backticks` for inline code.
+
+### Basic code blocks
+```
+Basic code block
+```
+
+### Code blocks with syntax highlighting
+```python
+def hello_world():
+    print("Hello, World!")
+```
+
+```html
+<div class="example">
+    <p>HTML example</p>
+</div>
+```
+
+```javascript
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+```
+
+TABLES
+------
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Data 1   | Data 2   | Data 3   |
+| More     | Data     | Here     |
+
+BLOCKQUOTES
+-----------
+> This is a blockquote
+> 
+> It can span multiple lines
+>> And can be nested
+
+HORIZONTAL RULES
+----------------
+---
+or
+***
+or
+___
+
+LINE BREAKS
+-----------
+End a line with two spaces  
+to create a line break
+
+Or use a blank line
+
+to create a paragraph break
+
+ESCAPE CHARACTERS
+-----------------
+Use backslash to escape special characters:
+\* \# \[ \] \( \) etc.
+
+TASK LISTS (GitHub-flavored)
+----------------------------
+- [x] Completed task
+- [ ] Incomplete task
+- [ ] Another task
+
+ADDITIONAL TIPS
+---------------
+1. Headers automatically create anchor links in many markdown viewers
+2. You can use HTML tags in markdown if needed
+3. Empty lines help separate content sections
+4. Most markdown editors provide live preview
+5. GitHub supports additional features like emoji :smile:
+6. For complex tables, consider using HTML table syntax
+7. Use --- or *** between sections for visual separation
+
+COMMON MARKDOWN EXTENSIONS
+---------------------------
+- Tables (shown above)
+- Task lists (shown above)
+- Strikethrough (~~text~~)
+- Syntax highlighting in code blocks
+- Auto-linking URLs
+- Footnotes (varies by implementation)
+
+Remember: Different markdown processors may support slightly different features,
+but the basics shown above work almost everywhere!
