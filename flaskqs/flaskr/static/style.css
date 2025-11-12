@@ -1,7 +1,85 @@
 html { font-family: sans-serif; background: #eee; padding: 1rem; }
-body { max-width: 960px; margin: 0 auto; background: white; }
-h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
-a { color: #377ba8; }
+body {
+  background: linear-gradient(180deg, #d9f4ff 0%, #e9fbff 100%); /* baby blue gradient */
+  min-height: 100vh;
+  margin: 0;
+  color: #222;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* make nav/content float above bubbles */
+nav, .content {
+  position: relative;
+  z-index: 2;
+}
+
+/* bubble layer */
+.bubbles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* each bubble */
+.bubbles span {
+  position: absolute;
+  bottom: -160px;
+  background: rgba(210,240,255,0.45); /* soft blue bubble tint */
+  border-radius: 50%;
+  box-shadow: inset -10px -10px 30px rgba(0,0,0,0.06);
+  opacity: 0.9;
+  filter: blur(0.4px);
+  animation-name: rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* sizes, positions, durations */
+.bubbles span:nth-child(1){ left: 6%;   width: 90px; height: 90px; animation-duration: 24s; animation-delay: 0s; }
+.bubbles span:nth-child(2){ left: 18%;  width: 40px; height: 40px; animation-duration: 16s; animation-delay: -3s; }
+.bubbles span:nth-child(3){ left: 28%;  width: 120px;height:120px;animation-duration: 30s; animation-delay: -6s; }
+.bubbles span:nth-child(4){ left: 38%;  width: 50px; height: 50px; animation-duration: 18s; animation-delay: -2s; }
+.bubbles span:nth-child(5){ left: 48%;  width: 70px; height: 70px; animation-duration: 22s; animation-delay: -8s; }
+.bubbles span:nth-child(6){ left: 58%;  width: 36px; height: 36px; animation-duration: 14s; animation-delay: -4s; }
+.bubbles span:nth-child(7){ left: 68%;  width:110px; height:110px; animation-duration: 26s; animation-delay: -7s; }
+.bubbles span:nth-child(8){ left: 78%;  width: 48px; height: 48px; animation-duration: 19s; animation-delay: -1s; }
+.bubbles span:nth-child(9){ left: 86%;  width: 80px; height: 80px; animation-duration: 21s; animation-delay: -5s; }
+.bubbles span:nth-child(10){ left: 92%; width: 30px; height: 30px; animation-duration: 12s; animation-delay: -9s; }
+.bubbles span:nth-child(11){ left: 34%; width: 26px; height: 26px; animation-duration: 13s; animation-delay: -10s; }
+.bubbles span:nth-child(12){ left: 12%; width: 60px; height: 60px; animation-duration: 20s; animation-delay: -11s; }
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-40vh) translateX(12px) scale(1.04);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-24px) scale(0.92);
+    opacity: 0;
+  }
+}
+
+/* tweak flashes */
+.flash {
+  position: relative;
+  z-index: 3;
+  padding: 0.5rem 1rem;
+  background: rgba(245,255,ff,0.9); /* subtle pale blue flash background */
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+
+/* tweak headings/links to match blue theme */
+h1 { font-family: serif; color: #0b5fa5; margin: 1rem 0; }
+a { color: #0b5fa5; }
 hr { border: none; border-top: 1px solid lightgray; }
 nav { background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; }
 nav h1 { flex: auto; margin: 0; }
@@ -11,7 +89,6 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .content { padding: 0 1rem 1rem; }
 .content > header { border-bottom: 1px solid lightgray; display: flex; align-items: flex-end; }
 .content > header h1 { flex: auto; margin: 1rem 0 0.25rem 0; }
-.flash { margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
 .post > header { display: flex; align-items: flex-end; font-size: 0.85em; }
 .post > header > div:first-of-type { flex: auto; }
 .post > header h1 { font-size: 1.5em; margin-bottom: 0; }

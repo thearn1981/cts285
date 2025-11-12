@@ -1,0 +1,4 @@
+{
+  "python.defaultInterpreterPath": "/workspaces/cts285/flaskqs/env/bin/python",
+  "python.analysis.extraPaths": ["./flaskr"]
+}

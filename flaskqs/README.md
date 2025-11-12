@@ -38,6 +38,13 @@ flask --app hello run --debug
 #### To help against injection attacks.
 import escape
 
-### Use Routing to help make things more meaningful.
+#### proper file structure 
+Having proper file structure is important when working with flask in reguards to having 
+templates and static files that will be used when displaying different pages for the application.
 
+#### When doing testing
+after tests code during develop is important. Making sure modules only run when called and If statements only activate when
+the condition are met is important. 
+once you have created and ready to run the tests. running the test from the right folder is important.
+OR you could create a pip install for the flaskr so that the tests will work properly.
 
