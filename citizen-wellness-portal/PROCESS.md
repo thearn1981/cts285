@@ -111,3 +111,92 @@ when creating a dashboard that only displays when the user is logged in can you 
 > if they are logged in and can see the dash board.
 
 ---
+## Part 3: Challenges and Resolutions
+
+
+### Challenge 1: [Learning Streamlit sessions]
+
+**What Happened:**
+> The page loaded but when the submit it would toss a error
+
+**What I Tried That Didn't Work:**
+> I refreshed it just incase to restart the session.
+
+
+**What Finally Worked:**
+> i asked chatgpt to help me with the issue who determined.
+What’s going wrong?
+You have a widget like:
+reg_username = st.text_input("Choose a username", key="reg_username")
+Later, after the form is submitted, you do:
+st.session_state.reg_username = ""
+For widget keys, Streamlit manages st.session_state internally. 
+In the same run, you’re not allowed to overwrite a widget’s key like that using attribute syntax, so you get:
+st.session_state.reg_username cannot be modified after the widget with key reg_username is instantiated
+
+**What I Learned:**
+> There is much to learn about the rules and what is allowed and when.
+
+---
+
+
+## Part 4: Flask vs Streamlit Comparison
+
+### Similarities I Noticed
+> Both create web applicatons
+> both use python as the main language
+> both support user input.
+
+### Key Differences
+> flask has a lot more customization.
+> Streamlit seems to be alot easier as far as creating dashboards with tabs.
+> Flask runs only when a user sends a request
+> Streamlit reruns your whole script automatically on every user interaction.
+
+### What Surprised Me Most
+> As much as i would learn more about flask depending on the project if simplicity is what you are looking for
+> streamlit seems to have that part down.
+
+### When I'd Choose Streamlit Over Flask
+> Just depends on what you are trying to accomplish flask and streamlit both can be very benefical
+> - Streamlit is better for: quick simple web applications
+> - Flask is better for: customization.
+
+---
+
+## Part 5: Reflection
+
+### What I'd Do Differently Next Time
+> There is still so much to learn about both flask and streamlit. So having more time to spend with each would be something.
+
+### Most Valuable Thing I Learned
+> The differences in how flask runs and streamlit. The importantance of session states.
+
+### Questions I Still Have
+> All the other cool things flask and streamlit could help someone create.
+
+### Self-Assessment of Learning Process
+> Rate yourself (1-5) on each:
+> - Prompt quality/iteration: [ 5] / 5
+> - Persistence when stuck: [ 5] / 5
+> - Documentation thoroughness: [5 ] / 5
+> - Understanding vs. copying: [ 4] / 5
+
+---
+
+## Part 6: Resources Used
+
+### AI Tools
+- [Which LLM(s) did you use?] Chatgpt, claude ai and copilot
+- [Approximately how many conversations/prompts?] 10
+
+### Documentation Referenced
+- [List any official docs, Stack Overflow, tutorials, etc.]
+
+### Help from Others
+- [Did you get help from classmates, instructors, forums? Credit them.]
+ 
+
+---
+
+**Note:** This document is worth 30% of your grade. Thorough, honest documentation of your learning process demonstrates the metacognitive skills this assignment is designed to develop.
