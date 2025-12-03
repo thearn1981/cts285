@@ -146,29 +146,31 @@ Accurate self-assessment is a professional skill. Over-inflating scores suggests
 
 ### Commit Quality (6 points possible)
 
-**My Score:** [ ] / 6
+**My Score:**6  / 6
 
 **Justification:**
-> - How many commits? [ ]
-> - Are messages descriptive? [Yes/No]
-> - Are commits atomic (one change per commit)? [Yes/No]
-> - Sample commit messages: [List 2-3]
+> - How many commits? 6-7
+> - Are messages descriptive? Yes
+> - Are commits atomic (one change per commit)? Yes
+> - Sample commit messages: Doc: included requirements.txt
+> - Doc: add learning process.md
+
 
 ---
 
 ### Pull Request (5 points possible)
 
-**My Score:** [ ] / 5
+**My Score:** 5 / 5
 
 **Justification:**
-> - Is description complete? [Yes/No]
-> - Is testing checklist filled out? [Yes/No]
-> - Does it link to the issue? [Yes/No]
-> - PR link: [URL]
+> - Is description complete? Yes
+> - Is testing checklist filled out? Yes
+> - Does it link to the issue? Yes
+> - PR link: https://github.com/thearn1981/cts285/pull/3
 
 ---
 
-### **Subtotal - Git Workflow:** [ ] / 15
+### **Subtotal - Git Workflow:** [15 ] / 15
 
 ---
 
@@ -227,23 +229,23 @@ Accurate self-assessment is a professional skill. Over-inflating scores suggests
 ## Final Reflection
 
 ### What I'm Most Proud Of
-> [One thing you did well]
+> Learning to use the LLM and how to ask the questions.
 
 ### What I'd Improve With More Time
-> [One thing you'd make better]
+> Learn the other things that i could do with either flask or streamlit.
 
 ### Honest Assessment of My Understanding
-> On a scale of 1-10, how well do I understand Streamlit now? [ ]
+> On a scale of 1-10, how well do I understand Streamlit now? 5
 > 
-> Could I build another Streamlit app without referencing this code? [Yes/Maybe/No]
+> Could I build another Streamlit app without referencing this code? No
 > 
-> Could I explain session_state to another student? [Yes/Maybe/No]
+> Could I explain session_state to another student? Maybe
 
 ---
 
 **Submission Checklist:**
-- [ ] All scores filled in with justifications
-- [ ] Total calculated correctly
-- [ ] Evidence referenced where appropriate
-- [ ] Reflection completed honestly
-- [ ] This file is included in my submission
+- [ x] All scores filled in with justifications
+- [ x] Total calculated correctly
+- [ x] Evidence referenced where appropriate
+- [x ] Reflection completed honestly
+- [ x] This file is included in my submission
