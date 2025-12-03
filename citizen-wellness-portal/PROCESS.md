@@ -1,113 +1,4 @@
-# Learning Process Documentation
-## Citizen Wellness Portal - PROCESS.md
-
-**Citizen Name:** Teresa Hearn    
-**Date Started:** 11/26/2025
-**Date Completed:** 12/4/2025
-**Total Time Spent:** [X hours]
-
-## Part 1: Initial Understanding
-
-### What I knew Before Starting
-> Befoe this assigment, this was not my first time playing around streamlit. In Advanced Python Class for the
-> the final project, my group decided to use streamlit over flask for the simplicity of some of the functions.
-
-### First Impressions
-> While I some of he ways you can customize flask makes its more appealing if you are looking for a specific look that you 
-> may not be able to achieve with streamlit.  Streamlit on the other hand if has some cool features and while we used streamlit
-> having some extra time to kinda explore some of the other ways that streamlit is different from flask is nice and helpful.
-
-## Part 2: LLM-Assisted Learning
-
-### Prompt 1: Understanding the differences between the two and how request/response cycle differs
-
-**Initial Prompt:**
-I know Flask but not Streamlit. Explain Streamlit's execution model— how does it differ from Flask's request/response cycle? What happens when a user clicks a button?
-
-**Key insights from response:**
-> In Flask:
-> browser sends an HTTP request (GET/POST/etc)
-> Flask matches it to a route function (@app.route("/..."))
-> Only that function runs, builds a response(HTML,JSON,etc), and returns it.
-> The server is basically stateless between requests unless you:
-    * Store stuff in a database/session/cache or use globals
-> So: request comes in → handler runs → response goes out.
-
->In streamlit:
-> there are no explicit routes and no template rendering step. 
-> instead the python script describes the UI top-to bottom.
-> streamlit re0runs your entire script from top to bottom.
-> On first page load:
-
-Streamlit runs your script from line 1 to the end.
-
-As it hits Streamlit calls (st.title, st.text_input, st.button, etc.), it:
-
-Builds the UI for the browser, and
-
-Connects each widget to internal state.
-
-When the user types in a text_input, clicks a button, moves a slider, etc.:
-
-The browser sends updated widget state to the Streamlit server (over WebSocket/HTTP under the hood).
-
-Streamlit re-runs your script from the top, using the current values of all widgets.
-
-The page is re-rendered based on the new state.
-
-There’s no manual render_template, no separate “view” and “controller”.
-The script is your view/controller, and it’s always evaluated top-to-bottom.
-
-Per-user sessions
-
-Each connected user (or even each browser tab) gets its own session.
-
-Streamlit maintains:
-
-Each session’s widget values
-
-Optional st.session_state for extra state you want to track
-
-So st.text_input or st.button values are per user by default.
-
-**Follow-up prompt:**
-Can you make a side by side model showing the differences.
-
-**key insight from response**
-Concept	                Flask           	                        Streamlit
-------------------------------------------------------------------------------------------------------------------
-Entry point	            Many route functions	                    One main script (optionally split into modules)
-Trigger for code    	HTTP request	                            Any UI interaction / page load
-Scope of execution	    Only the matched route handler	            Entire script reruns top-to-bottom
-State persistence	    DB, session, globals, etc.	                Widget state + st.session_state per user session
-Templates / HTML	    Manual templates (render_template)	        UI defined directly in Python (st.* calls)
-Button click	        New HTTP request to a route	                Sends widget update → reruns script → st.button True once
-
-**What I Understood After This Exchange:**
-> That how things are ran is different. Flask only uses the function that as called and streamlit reruns the whole thing.
-
-### Prompt 2: ["Session State Basics"]
-
-**Initial Prompt:**
-can you in simple terms explain to me Session state Basics for streamlit
-
-**Key Insights from Response:**
-> Since the script is re ran every time seesion states help remember things between these reruns.
-> Because without it:
-> counters reset
-> form inputs disappear
-> temporary values vanish
-> your app "forgets" everything each rerun
-> Session state lets you store values that should survive those reruns.
-> Session state will remember anything you need it to remember:
-> numbers
-> strings
-> lists
-> objects
-> flags(like "button clicked?" or "tab opened?")
-
-**Follow-up Prompt (if any):**
-> soo if i run a session state "tessa" today and then close it, and then i create other sessions between then and say tomorrow and i go > back to session state "tessa" does the data still stored or no?
+then i create other sessions between then and say tomorrow and i go > back to session state "tessa" does the data still stored or no?
 
 **What I Understood After This Exchange:**
 > Sessions states help remember things for that current session which is super helpful.
@@ -208,14 +99,15 @@ can you in simple terms explain to me Session state Basics for streamlit
 
 ---
 
-### Prompt 5: [Additional Topic]
+### Prompt 5: [Adding the dashboard that you can see only once you are logged in.]
 
 **Prompt:**
 ```
-[Your prompt]
+when creating a dashboard that only displays when the user is logged in can you explain how this works.
 ```
 
 **What I Learned:**
-> [Key takeaway]
+> So like with other things the session state stores information and logged_in is one of them and will determine
+> if they are logged in and can see the dash board.
 
 ---
